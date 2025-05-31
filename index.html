@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Convite para nosso date 💖</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-pink-50 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
+        <h1 class="text-3xl font-bold text-pink-600 text-center mb-4">Oi, Itinho!</h1>
+        <p class="text-gray-700 mb-2">
+            Queria sua ajuda pra decidir o horário do cinema e onde vamos jantar!
+        </p>
+        <p class="text-pink-500 font-medium mb-8">
+            Você é meu convidado! 😊
+        </p>
+
+        <form class="space-y-6" onsubmit="return enviarWhatsApp(event)">
+            <!-- Seletor de cinema e horário -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2" for="cinema-horario">
+                    Escolhe o cinema e horário 🍿
+                </label>
+                <select id="cinema-horario" name="cinema-horario" required class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                    <option value="">Selecione uma opção</option>
+                    <optgroup label="Cineflix Shopping Bela Vista">
+                        <option value="Cineflix Bela Vista - 17:00">17:00</option>
+                        <option value="Cineflix Bela Vista - 21:30">21:30</option>
+                    </optgroup>
+                    <optgroup label="Cinemark Salvador">
+                        <option value="Cinemark Salvador - 16:15">16:15</option>
+                        <option value="Cinemark Salvador - 18:50">18:50</option>
+                    </optgroup>
+                    <optgroup label="UCI Orient Shopping da Bahia">
+                        <option value="UCI Orient Shopping da Bahia - 16:50">16:50</option>
+                        <option value="UCI Orient Shopping da Bahia - 19:10">19:10</option>
+                        <option value="UCI Orient Shopping da Bahia - 19:40">19:40</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Restaurantes com checkbox -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Onde jantamos depois? 😋 (pode escolher mais de um)
+                </label>
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <!-- Restaurante 1 -->
+                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
+                        <input type="checkbox" name="restaurantes" value="Regalo Pizzeria" class="mt-1">
+                        <div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipNGw6ej3oXieRYifQCWXq_eHrA85D9vaerWI9Z0=w408-h612-k-no" alt="Joks - Jogos & Drinks" class="rounded-md mb-1">
+                            <a href="https://maps.app.goo.gl/dMxmcbMctRYYtgo26" target="_blank" class="text-pink-600 font-semibold hover:underline">
+                Joks - Jogos & Drinks 🎲
+              </a>
+                        </div>
+                    </label>
+                    <!-- Restaurante 2 -->
+                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
+                        <input type="checkbox" name="restaurantes" value="Buddha Bistrô Asiático" class="mt-1">
+                        <div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipO7Y_LR79dzHV8abqCH5qicbRv9B4UBldyA2n5Z=w408-h612-k-no" alt="Buddha Bistrô Asiático" class="rounded-md mb-1">
+                            <a href="https://maps.app.goo.gl/nTrvarRtH25wmfhZ7" target="_blank" class="text-pink-600 font-semibold hover:underline">
+                Buddha Bistrô Asiático 🍣
+              </a>
+                        </div>
+                    </label>
+                    <!-- Restaurante 3 -->
+                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
+                        <input type="checkbox" name="restaurantes" value="Coco Bambu" class="mt-1">
+                        <div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipNvCXzzdMD0A-XN9ZiLqQGQizM9B0pjKQpTWXRv=w203-h203-k-no" alt="Coco Bambu" class="rounded-md mb-1">
+                            <a href="https://maps.app.goo.gl/dQESrK8g36zpk7tF9" target="_blank" class="text-pink-600 font-semibold hover:underline">
+                Coco Bambu 🍤
+              </a>
+                        </div>
+                    </label>
+                    <!-- Restaurante 4 -->
+                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
+                        <input type="checkbox" name="restaurantes" value="Alfredo di Roma" class="mt-1">
+                        <div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipPoWA6CNnp8g03wfaXDN3KwtdFqxJQT_Fpmz-k6=w203-h243-k-no" alt="RED Burger N Bar" class="rounded-md mb-1">
+                            <a href="https://maps.app.goo.gl/xS5bN42YSZgzap5y7" target="_blank" class="text-pink-600 font-semibold hover:underline">
+                RED Burger N Bar 🍔
+              </a>
+                        </div>
+                    </label>
+                    <!-- Restaurante 5 -->
+                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
+                        <input type="checkbox" name="restaurantes" value="Regalo Pizzeria" class="mt-1">
+                        <div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipMpsPx0Kzs7jQNTjJZgTRfKO9x5MaKTdbFF0POE=w203-h111-k-no" alt="Purgatório Bar" class="rounded-md mb-1">
+                            <a href="https://maps.app.goo.gl/RnKpSEQtucHy4XuE6" target="_blank" class="text-pink-600 font-semibold hover:underline">
+                Purgatório Bar 🍸
+              </a>
+                        </div>
+                    </label>
+                    <!-- Restaurante 6 -->
+                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
+                        <input type="checkbox" name="restaurantes" value="Regalo Pizzeria" class="mt-1">
+                        <div>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipNsup5QPHO8z0FdYP8mveD4MiXTHyuSGvtQCTJ2=w203-h135-k-no" alt="Regalo Pizzeria" class="rounded-md mb-1">
+                            <a href="https://maps.app.goo.gl/GCsvCyFYpKnx69Zb9" target="_blank" class="text-pink-600 font-semibold hover:underline">
+                Regalo Pizzeria 🍕
+              </a>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Botão de envio -->
+            <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-xl transition">
+                Confirmar nosso date 💖
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function enviarWhatsApp(event) {
+          event.preventDefault();
+          const cinema = document.getElementById('cinema-horario').value;
+          const restaurantes = Array.from(document.querySelectorAll('input[name="restaurantes"]:checked'))
+            .map(input => input.value)
+            .join(', ');
+          const mensagem = `Oi! Já escolhi:
+    🎬 Cinema: ${cinema}
+    🍽️ Restaurantes: ${restaurantes}`;
+          const numero = '5516982220820';
+          const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+          window.open(link, '_blank');
+          return false;
+        }
+    </script>
+</body>
+
+</html>
