@@ -129,42 +129,12 @@
     <!-- Tela do Formulário -->
     <div id="tela-formulario" class="hidden bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
         <h1 class="text-3xl font-bold text-pink-600 text-center mb-4">Oi, Itinho!</h1>
-        <p class="text-gray-700 mb-2">
-            Queria sua ajuda pra decidir o horário do cinema e onde vamos jantar!
-        </p>
-        <p class="text-pink-500 font-medium mb-8">
-            Você é meu convidado! 😊
-        </p>
 
         <form class="space-y-6" onsubmit="return enviarWhatsApp(event)">
-            <!-- Seletor de cinema e horário -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2" for="cinema-horario">
-                    Escolhe o cinema e horário 🍿
-                </label>
-                <select id="cinema-horario" name="cinema-horario" required
-                    class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:ring-pink-500 focus:border-pink-500">
-                    <option value="">Selecione uma opção</option>
-                    <optgroup label="Cineflix Shopping Bela Vista">
-                        <option value="Cineflix Bela Vista - 17:00">17:00</option>
-                        <option value="Cineflix Bela Vista - 21:30">21:30</option>
-                    </optgroup>
-                    <optgroup label="Cinemark Salvador">
-                        <option value="Cinemark Salvador - 16:15">16:15</option>
-                        <option value="Cinemark Salvador - 18:50">18:50</option>
-                    </optgroup>
-                    <optgroup label="UCI Orient Shopping da Bahia">
-                        <option value="UCI Orient Shopping da Bahia - 16:50">16:50</option>
-                        <option value="UCI Orient Shopping da Bahia - 19:10">19:10</option>
-                        <option value="UCI Orient Shopping da Bahia - 19:40">19:40</option>
-                    </optgroup>
-                </select>
-            </div>
-
             <!-- Restaurantes com checkbox -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Onde jantamos depois? 😋 (pode escolher mais de um)
+                    Onde vamos jantar? 😋 (pode escolher mais de um)
                 </label>
                 <div class="grid gap-4 sm:grid-cols-2">
                     <!-- Restaurante 1 -->
@@ -292,18 +262,23 @@
         // Função original do WhatsApp
         function enviarWhatsApp(event) {
             event.preventDefault();
-            const cinema = document.getElementById('cinema-horario').value;
+            
             const restaurantes = Array.from(document.querySelectorAll('input[name="restaurantes"]:checked'))
                 .map(input => input.value)
                 .join(', ');
+
+            // Validar se pelo menos um restaurante foi selecionado
+            if (restaurantes.length === 0) {
+                alert('Por favor, selecione pelo menos um restaurante! 😊');
+                return false;
+            }
 
             // Incluir o prêmio da roleta na mensagem
             const premioSorteado = document.getElementById('premio-sorteado').textContent;
 
             const mensagem = `Oi! Já escolhi:
-🎬 Cinema: ${cinema}
 🍽️ Restaurantes: ${restaurantes}
-💎 GANHEI O TICKET DOURADO METÁLICO: ${premioSorteado}`;
+🎫 GANHEI O TICKET DOURADO METÁLICO!`;
 
             const numero = '5516982220820';
             const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
