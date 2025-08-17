@@ -259,6 +259,12 @@
         function continuarParaDate() {
             document.getElementById('tela-roleta').classList.add('hidden');
             document.getElementById('tela-formulario').classList.remove('hidden');
+            
+            // Scroll suave para o topo da página
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
 
         // Função original do WhatsApp
