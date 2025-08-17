@@ -6,10 +6,128 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Convite para nosso date 💖</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .roleta-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        .roleta {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(#ffd700 0deg 60deg,
+                    #ff6b9d 60deg 120deg,
+                    #6bcf7f 120deg 180deg,
+                    #4d96ff 180deg 240deg,
+                    #9b59b6 240deg 300deg,
+                    #ff5722 300deg 360deg);
+            transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .roleta::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(linear-gradient(135deg,
+                        rgba(255, 215, 0, 0.8) 0%,
+                        rgba(255, 237, 78, 0.9) 25%,
+                        rgba(255, 193, 7, 0.8) 50%,
+                        rgba(255, 179, 0, 0.9) 75%,
+                        rgba(218, 165, 32, 0.8) 100%) 0deg 60deg,
+                    transparent 60deg 360deg);
+            animation: golden-shine 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes golden-shine {
+            0% {
+                opacity: 0.6;
+                box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.3);
+            }
+
+            100% {
+                opacity: 0.9;
+                box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4);
+            }
+        }
+
+        .roleta-ponteiro {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 30px solid #333;
+            z-index: 10;
+        }
+
+        .premio-texto {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 
 <body class="bg-pink-50 flex items-center justify-center min-h-screen">
-    <div class="bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
+    <!-- Tela da Roleta -->
+    <div id="tela-roleta" class="bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
+        <h1 class="text-3xl font-bold text-pink-600 text-center mb-4">Oi, Itinho!</h1>
+        <p class="text-gray-700 text-center mb-8">
+            Antes de escolhermos nosso date, que tal girar a roleta e ver que surpresa te espera? 🎁
+        </p>
+
+        <div class="roleta-container mb-8">
+            <div class="roleta-ponteiro"></div>
+            <div id="roleta" class="roleta">
+                <div class="premio-texto">
+                </div>
+            </div>
+        </div>
+
+        <button id="girar-roleta"
+            class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition text-xl">
+            🎲 Girar a Roleta!
+        </button>
+
+        <div id="resultado-roleta" class="hidden mt-6 p-4 bg-pink-50 rounded-xl text-center">
+            <p class="text-lg font-semibold text-pink-600 mb-4">🎉 Parabéns!</p>
+            <img src="public/Bilhete Dourado com Retrato.png" alt="Ticket Dourado"
+                class="mx-auto mb-4 rounded-lg max-w-xs">
+            <p id="premio-sorteado" class="text-gray-700 mb-4 whitespace-pre-line"></p>
+            <button id="continuar-date"
+                class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-xl transition">
+                Continuar para o date! 💖
+            </button>
+        </div>
+    </div>
+
+    <!-- Tela do Formulário -->
+    <div id="tela-formulario" class="hidden bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
         <h1 class="text-3xl font-bold text-pink-600 text-center mb-4">Oi, Itinho!</h1>
         <p class="text-gray-700 mb-2">
             Queria sua ajuda pra decidir o horário do cinema e onde vamos jantar!
@@ -24,7 +142,8 @@
                 <label class="block text-sm font-medium text-gray-700 mb-2" for="cinema-horario">
                     Escolhe o cinema e horário 🍿
                 </label>
-                <select id="cinema-horario" name="cinema-horario" required class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                <select id="cinema-horario" name="cinema-horario" required
+                    class="w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:ring-pink-500 focus:border-pink-500">
                     <option value="">Selecione uma opção</option>
                     <optgroup label="Cineflix Shopping Bela Vista">
                         <option value="Cineflix Bela Vista - 17:00">17:00</option>
@@ -50,89 +169,153 @@
                 <div class="grid gap-4 sm:grid-cols-2">
                     <!-- Restaurante 1 -->
                     <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Joks - Jogos & Drinks" class="mt-1">
+                        <input type="checkbox" name="restaurantes" value="Alfredo'Ro" class="mt-1">
                         <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipNGw6ej3oXieRYifQCWXq_eHrA85D9vaerWI9Z0=w408-h612-k-no" alt="Joks - Jogos & Drinks" class="rounded-md mb-1">
-                            <a href="https://maps.app.goo.gl/dMxmcbMctRYYtgo26" target="_blank" class="text-pink-600 font-semibold hover:underline">
-                Joks - Jogos & Drinks 🎲
-              </a>
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipNXxIgw7BHBUx3fONWP1Kl61AjkG7sH39WetCZ1=w203-h135-k-no"
+                                alt="Alfredo'Ro" class="rounded-md mb-1">
+                            <a href="https://www.google.com/maps/place/Alfredo'Ro/data=!4m2!3m1!1s0x71603653a184c61:0xf34c96500ad85c31?sa=X&ved=1t:242&ictx=111"
+                                target="_blank" class="text-pink-600 font-semibold hover:underline">
+                                Alfredo'Ro 🍝
+                            </a>
                         </div>
                     </label>
                     <!-- Restaurante 2 -->
                     <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Buddha Bistrô Asiático" class="mt-1">
+                        <input type="checkbox" name="restaurantes" value="Ayrá Bar Salvador" class="mt-1">
                         <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipO7Y_LR79dzHV8abqCH5qicbRv9B4UBldyA2n5Z=w408-h612-k-no" alt="Buddha Bistrô Asiático" class="rounded-md mb-1">
-                            <a href="https://maps.app.goo.gl/nTrvarRtH25wmfhZ7" target="_blank" class="text-pink-600 font-semibold hover:underline">
-                Buddha Bistrô Asiático 🍣
-              </a>
+                            <img src="https://www.salvadordabahia.com/wp-content/uploads/2025/05/ayra_05mar2025_31_1920x1280px_credito-leonardo-freire-500x500.jpg"
+                                alt="Ayrá Bar Salvador" class="rounded-md mb-1">
+                            <a href="https://www.instagram.com/ayrabarsalvador/" target="_blank"
+                                class="text-pink-600 font-semibold hover:underline">
+                                Ayrá Bar Salvador 🍹
+                            </a>
                         </div>
                     </label>
                     <!-- Restaurante 3 -->
                     <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Coco Bambu" class="mt-1">
+                        <input type="checkbox" name="restaurantes" value="Combo: RED Burger + Purgatório Bar"
+                            class="mt-1">
                         <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipNvCXzzdMD0A-XN9ZiLqQGQizM9B0pjKQpTWXRv=w203-h203-k-no" alt="Coco Bambu" class="rounded-md mb-1">
-                            <a href="https://maps.app.goo.gl/dQESrK8g36zpk7tF9" target="_blank" class="text-pink-600 font-semibold hover:underline">
-                Coco Bambu 🍤
-              </a>
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <img src="https://lh3.googleusercontent.com/p/AF1QipPoWA6CNnp8g03wfaXDN3KwtdFqxJQT_Fpmz-k6=w203-h243-k-no"
+                                    alt="RED Burger N Bar" class="rounded-md w-full h-16 object-cover">
+                                <img src="https://lh3.googleusercontent.com/p/AF1QipMpsPx0Kzs7jQNTjJZgTRfKO9x5MaKTdbFF0POE=w203-h111-k-no"
+                                    alt="Purgatório Bar" class="rounded-md w-full h-16 object-cover">
+                            </div>
+                            <div class="text-pink-600 font-semibold">
+                                Combo: RED Burger + Purgatório 🍔🍸
+                                <br>
+                                <span class="text-xs text-gray-500">Jantar + drinks</span>
+                            </div>
                         </div>
                     </label>
                     <!-- Restaurante 4 -->
                     <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="RED Burger N Bar" class="mt-1">
+                        <input type="checkbox" name="restaurantes" value="Jabú Restô & Bar" class="mt-1">
                         <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipPoWA6CNnp8g03wfaXDN3KwtdFqxJQT_Fpmz-k6=w203-h243-k-no" alt="RED Burger N Bar" class="rounded-md mb-1">
-                            <a href="https://maps.app.goo.gl/xS5bN42YSZgzap5y7" target="_blank" class="text-pink-600 font-semibold hover:underline">
-                RED Burger N Bar 🍔
-              </a>
-                        </div>
-                    </label>
-                    <!-- Restaurante 5 -->
-                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Purgatório Bar" class="mt-1">
-                        <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipMpsPx0Kzs7jQNTjJZgTRfKO9x5MaKTdbFF0POE=w203-h111-k-no" alt="Purgatório Bar" class="rounded-md mb-1">
-                            <a href="https://maps.app.goo.gl/RnKpSEQtucHy4XuE6" target="_blank" class="text-pink-600 font-semibold hover:underline">
-                Purgatório Bar 🍸
-              </a>
-                        </div>
-                    </label>
-                    <!-- Restaurante 6 -->
-                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Regalo Pizzeria" class="mt-1">
-                        <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipNsup5QPHO8z0FdYP8mveD4MiXTHyuSGvtQCTJ2=w203-h135-k-no" alt="Regalo Pizzeria" class="rounded-md mb-1">
-                            <a href="https://maps.app.goo.gl/GCsvCyFYpKnx69Zb9" target="_blank" class="text-pink-600 font-semibold hover:underline">
-                Regalo Pizzeria 🍕
-              </a>
+                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/a8/4c/aa/menu-completo.jpg?w=900&h=500&s=1"
+                                alt="Jabú Restô & Bar" class="rounded-md mb-1">
+                            <a href="https://www.instagram.com/jabu_salvador/" target="_blank"
+                                class="text-pink-600 font-semibold hover:underline">
+                                Jabú Restô & Bar 🍽️
+                            </a>
                         </div>
                     </label>
                 </div>
             </div>
 
             <!-- Botão de envio -->
-            <button type="submit" class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-xl transition">
+            <button type="submit"
+                class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-xl transition">
                 Confirmar nosso date 💖
             </button>
         </form>
     </div>
 
     <script>
-        function enviarWhatsApp(event) {
-          event.preventDefault();
-          const cinema = document.getElementById('cinema-horario').value;
-          const restaurantes = Array.from(document.querySelectorAll('input[name="restaurantes"]:checked'))
-            .map(input => input.value)
-            .join(', ');
-          const mensagem = `Oi! Já escolhi:
-    🎬 Cinema: ${cinema}
-    🍽️ Restaurantes: ${restaurantes}`;
-          const numero = '5516982220820';
-          const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-          window.open(link, '_blank');
-          return false;
+        // Setores da roleta (6 partes iguais de 60 graus cada)
+        const setores = [
+            { inicio: 0, fim: 60, cor: "dourado", premio: "🎫 TICKET DOURADO METÁLICO! ✨\nEste encontro é por minha conta. 💖\nVocê só precisa aparecer e se divertir. 🎉😊" },
+            { inicio: 60, fim: 120, cor: "rosa", premio: null },
+            { inicio: 120, fim: 180, cor: "verde", premio: null },
+            { inicio: 180, fim: 240, cor: "azul", premio: null },
+            { inicio: 240, fim: 300, cor: "roxo", premio: null },
+            { inicio: 300, fim: 360, cor: "laranja", premio: null }
+        ];
+
+        let roletaGirada = false;
+
+        // Função para girar a roleta
+        function girarRoleta() {
+            if (roletaGirada) return;
+
+            const botao = document.getElementById('girar-roleta');
+            const roleta = document.getElementById('roleta');
+            const premioTexto = document.querySelector('.premio-texto');
+
+            // Desabilitar botão
+            botao.disabled = true;
+            botao.textContent = '🎲 Girando...';
+
+            // Sempre escolher o primeiro setor (0-60 graus) - setor dourado metálico
+            const setorEscolhido = setores[0]; // Primeiro setor da array
+
+            // Para o ponteiro na parte de baixo apontando para o primeiro setor (270-330 graus na rotação final)
+            // Isso fará com que o primeiro setor (0-60 graus original) fique na posição do ponteiro
+            const anguloFinal = 270 + Math.random() * 60; // Entre 270-330 graus
+
+            // Calcular rotação (múltiplas voltas + posição final)
+            const voltasCompletas = 5; // 5 voltas completas
+            const rotacaoTotal = (voltasCompletas * 360) + anguloFinal;
+
+            // Aplicar rotação
+            roleta.style.transform = `rotate(${rotacaoTotal}deg)`;
+
+            // Após a animação terminar (3 segundos)
+            setTimeout(() => {
+                document.getElementById('premio-sorteado').textContent = setorEscolhido.premio;
+                document.getElementById('resultado-roleta').classList.remove('hidden');
+
+                // Remover o botão após o sorteio
+                botao.style.display = 'none';
+
+                roletaGirada = true;
+            }, 3000);
         }
+
+        // Função para continuar para o formulário
+        function continuarParaDate() {
+            document.getElementById('tela-roleta').classList.add('hidden');
+            document.getElementById('tela-formulario').classList.remove('hidden');
+        }
+
+        // Função original do WhatsApp
+        function enviarWhatsApp(event) {
+            event.preventDefault();
+            const cinema = document.getElementById('cinema-horario').value;
+            const restaurantes = Array.from(document.querySelectorAll('input[name="restaurantes"]:checked'))
+                .map(input => input.value)
+                .join(', ');
+
+            // Incluir o prêmio da roleta na mensagem
+            const premioSorteado = document.getElementById('premio-sorteado').textContent;
+
+            const mensagem = `Oi! Já escolhi:
+🎬 Cinema: ${cinema}
+🍽️ Restaurantes: ${restaurantes}
+💎 GANHEI O TICKET DOURADO METÁLICO: ${premioSorteado}`;
+
+            const numero = '5516982220820';
+            const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+            window.open(link, '_blank');
+            return false;
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('girar-roleta').addEventListener('click', girarRoleta);
+            document.getElementById('continuar-date').addEventListener('click', continuarParaDate);
+        });
     </script>
 </body>
 
