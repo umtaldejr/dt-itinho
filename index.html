@@ -4,87 +4,60 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Convite para nosso date 💖</title>
+    <title>Date Night: Comes & Bebes + Maratona Survivor 🎬🍿</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .roleta-container {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 0 auto;
+        .gradient-bg {
+            background: linear-gradient(135deg, #2d5016 0%, #3e7b27 50%, #1a3409 100%);
         }
 
-        .roleta {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(#ffd700 0deg 60deg,
-                    #ff6b9d 60deg 120deg,
-                    #6bcf7f 120deg 180deg,
-                    #4d96ff 180deg 240deg,
-                    #9b59b6 240deg 300deg,
-                    #ff5722 300deg 360deg);
-            transition: transform 3s cubic-bezier(0.23, 1, 0.32, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        .card-hover {
+            transition: all 0.3s ease;
         }
 
-        .roleta::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(linear-gradient(135deg,
-                        rgba(255, 215, 0, 0.8) 0%,
-                        rgba(255, 237, 78, 0.9) 25%,
-                        rgba(255, 193, 7, 0.8) 50%,
-                        rgba(255, 179, 0, 0.9) 75%,
-                        rgba(218, 165, 32, 0.8) 100%) 0deg 60deg,
-                    transparent 60deg 360deg);
-            animation: golden-shine 2s ease-in-out infinite alternate;
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        @keyframes golden-shine {
-            0% {
-                opacity: 0.6;
-                box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.3);
-            }
+        .date-option {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
 
+        .date-option:hover {
+            background-color: #f3f4f6;
+        }
+
+        .date-option.selected {
+            background-color: #dcfce7;
+            color: #166534;
+            border-color: #16a34a;
+        }
+
+        .survivor-logo {
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
             100% {
-                opacity: 0.9;
-                box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4);
+                opacity: 1;
             }
-        }
 
-        .roleta-ponteiro {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 15px solid transparent;
-            border-right: 15px solid transparent;
-            border-top: 30px solid #333;
-            z-index: 10;
-        }
-
-        .premio-texto {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 10px;
-            border-radius: 50px;
-            font-weight: bold;
-            color: #333;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            50% {
+                opacity: 0.7;
+            }
         }
 
         .hidden {
@@ -93,211 +66,286 @@
     </style>
 </head>
 
-<body class="bg-pink-50 flex items-center justify-center min-h-screen">
-    <!-- Tela da Roleta -->
-    <div id="tela-roleta" class="bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
-        <h1 class="text-3xl font-bold text-pink-600 text-center mb-4">Oi, Itinho!</h1>
-        <p class="text-gray-700 text-center mb-8">
-            Antes de escolhermos nosso date, que tal girar a roleta e ver que surpresa te espera? 🎁
-        </p>
+<body class="bg-green-50 min-h-screen" style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);">
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle at 25% 25%, #065f46 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+    </style>
+    <!-- Header -->
+    <header class="gradient-bg text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-leaf text-2xl text-green-300"></i>
+                    <h1 class="text-2xl font-bold">Sympla</h1>
+                </div>
+                <div class="text-sm opacity-90">
+                    <i class="fas fa-calendar-alt mr-1"></i>
+                    Evento Exclusivo
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <div class="roleta-container mb-8">
-            <div class="roleta-ponteiro"></div>
-            <div id="roleta" class="roleta">
-                <div class="premio-texto">
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Event Hero Section -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden mb-8 card-hover">
+            <div class="relative h-64 bg-gradient-to-r from-green-800 via-green-600 to-emerald-700">
+                <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="text-center text-white">
+                        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                            Jungle Date Night 🌿❤️🌿
+                        </h1>
+                        <p class="text-xl md:text-2xl font-light mb-3">
+                            <span class="survivor-logo font-bold">SURVIVOR</span> Night Experience
+                        </p>
+                        <p class="text-lg md:text-xl font-medium opacity-90">
+                            Consegue sobreviver à essa aventura selvagem? 🥵🔥
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-8">
+                <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+                    <div class="text-center">
+                        <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-drumstick-bite text-2xl text-yellow-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Banquete Tropical</h3>
+                        <p class="text-gray-600 text-sm">Petiscos e bebidas da selva</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-music text-2xl text-green-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Sons da Natureza</h3>
+                        <p class="text-gray-600 text-sm">Hits pop para embalar a noite</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-spa text-2xl text-blue-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Ritual de Relaxamento</h3>
+                        <p class="text-gray-600 text-sm">Massagem com óleos naturais</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-fire text-2xl text-purple-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Maratona Survivor</h3>
+                        <p class="text-gray-600 text-sm">Escolha sua temporada favorita</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-heart text-2xl text-red-600"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-800 mb-2">Conexão Especial</h3>
+                        <p class="text-gray-600 text-sm">Uma aventura inesquecível</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <button id="girar-roleta"
-            class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-3 px-6 rounded-xl transition text-xl">
-            🎲 Girar a Roleta!
-        </button>
+        <!-- Ticket Selection -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 card-hover">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Escolha sua Data</h2>
+            </div>
 
-        <div id="resultado-roleta" class="hidden mt-6 p-4 bg-pink-50 rounded-xl text-center">
-            <p class="text-lg font-semibold text-pink-600 mb-4">🎉 Parabéns!</p>
-            <img src="public/Bilhete Dourado com Retrato 2.png" alt="Ticket Dourado"
-                class="mx-auto mb-4 rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg h-auto object-contain">
-            <p id="premio-sorteado" class="text-gray-700 mb-4 whitespace-pre-line"></p>
-            <button id="continuar-date"
-                class="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-6 rounded-xl transition">
-                Continuar para o date! 💖
-            </button>
-        </div>
-    </div>
+            <!-- Date Options -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+                <div class="date-option border-2 border-gray-200 rounded-xl p-6 text-center" data-date="2025-10-01"
+                    data-day="Quarta-feira">
+                    <div class="text-2xl font-bold text-gray-800">01</div>
+                    <div class="text-sm text-gray-600 mb-2">Outubro</div>
+                    <div class="text-lg font-semibold text-green-600">Quarta-feira</div>
+                    <div class="text-sm text-gray-500 mt-2">Horário em aberto</div>
+                    <div class="mt-3">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-check-circle mr-1"></i>Disponível
+                        </span>
+                    </div>
+                </div>
 
-    <!-- Tela do Formulário -->
-    <div id="tela-formulario" class="hidden bg-white shadow-xl rounded-2xl p-8 max-w-xl w-full">
-        <h1 class="text-3xl font-bold text-pink-600 text-center mb-4">Oi, Itinho!</h1>
+                <div class="date-option border-2 border-gray-200 rounded-xl p-6 text-center" data-date="2025-10-02"
+                    data-day="Quinta-feira">
+                    <div class="text-2xl font-bold text-gray-800">02</div>
+                    <div class="text-sm text-gray-600 mb-2">Outubro</div>
+                    <div class="text-lg font-semibold text-green-600">Quinta-feira</div>
+                    <div class="text-sm text-gray-500 mt-2">Horário em aberto</div>
+                    <div class="mt-3">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-check-circle mr-1"></i>Disponível
+                        </span>
+                    </div>
+                </div>
 
-        <form class="space-y-6" onsubmit="return enviarWhatsApp(event)">
-            <!-- Restaurantes com checkbox -->
-            <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Onde vamos jantar? 😋 (pode escolher mais de um)
-                </label>
-                <div class="grid gap-4 sm:grid-cols-2">
-                    <!-- Restaurante 1 -->
-                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Alfredo'Ro" class="mt-1">
-                        <div>
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipNXxIgw7BHBUx3fONWP1Kl61AjkG7sH39WetCZ1=w203-h135-k-no"
-                                alt="Alfredo'Ro" class="rounded-md mb-1">
-                            <a href="https://www.instagram.com/restaurantealfredoro/"
-                                target="_blank" class="text-pink-600 font-semibold hover:underline">
-                                Alfredo'Ro 🍝
-                            </a>
-                        </div>
-                    </label>
-                    <!-- Restaurante 2 -->
-                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Ayrá Bar Salvador" class="mt-1">
-                        <div>
-                            <img src="https://www.salvadordabahia.com/wp-content/uploads/2025/05/ayra_05mar2025_31_1920x1280px_credito-leonardo-freire-500x500.jpg"
-                                alt="Ayrá Bar Salvador" class="rounded-md mb-1">
-                            <a href="https://www.instagram.com/ayrabarsalvador/" target="_blank"
-                                class="text-pink-600 font-semibold hover:underline">
-                                Ayrá Bar Salvador 🍹
-                            </a>
-                        </div>
-                    </label>
-                    <!-- Restaurante 3 -->
-                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Combo: RED Burger + Purgatório Bar"
-                            class="mt-1">
-                        <div>
-                            <div class="grid grid-cols-2 gap-2 mb-2">
-                                <img src="https://lh3.googleusercontent.com/p/AF1QipPoWA6CNnp8g03wfaXDN3KwtdFqxJQT_Fpmz-k6=w203-h243-k-no"
-                                    alt="RED Burger N Bar" class="rounded-md w-full h-16 object-cover">
-                                <img src="https://lh3.googleusercontent.com/p/AF1QipMpsPx0Kzs7jQNTjJZgTRfKO9x5MaKTdbFF0POE=w203-h111-k-no"
-                                    alt="Purgatório Bar" class="rounded-md w-full h-16 object-cover">
-                            </div>
-                            <div class="text-pink-600 font-semibold">
-                                <a href="https://www.instagram.com/purgatorio.bar/" target="_blank" class="hover:underline">
-                                    Combo: RED Burger + Purgatório 🍔🍸
-                                </a>
-                                <br>
-                                <span class="text-xs text-gray-500">Jantar + drinks</span>
-                            </div>
-                        </div>
-                    </label>
-                    <!-- Restaurante 4 -->
-                    <label class="flex items-start space-x-4 border rounded-xl p-3 hover:shadow-md cursor-pointer">
-                        <input type="checkbox" name="restaurantes" value="Jabú Restô & Bar" class="mt-1">
-                        <div>
-                            <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/a8/4c/aa/menu-completo.jpg?w=900&h=500&s=1"
-                                alt="Jabú Restô & Bar" class="rounded-md mb-1">
-                            <a href="https://www.instagram.com/jabu_salvador/" target="_blank"
-                                class="text-pink-600 font-semibold hover:underline">
-                                Jabú Restô & Bar 🍽️
-                            </a>
-                        </div>
-                    </label>
+                <div class="date-option border-2 border-gray-200 rounded-xl p-6 text-center" data-date="2025-10-03"
+                    data-day="Sexta-feira">
+                    <div class="text-2xl font-bold text-gray-800">03</div>
+                    <div class="text-sm text-gray-600 mb-2">Outubro</div>
+                    <div class="text-lg font-semibold text-green-600">Sexta-feira</div>
+                    <div class="text-sm text-gray-500 mt-2">Horário em aberto</div>
+                    <div class="mt-3">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-check-circle mr-1"></i>Disponível
+                        </span>
+                    </div>
+                </div>
+
+                <div class="date-option border-2 border-gray-200 rounded-xl p-6 text-center" data-date="2025-10-04"
+                    data-day="Sábado">
+                    <div class="text-2xl font-bold text-gray-800">04</div>
+                    <div class="text-sm text-gray-600 mb-2">Outubro</div>
+                    <div class="text-lg font-semibold text-green-600">Sábado</div>
+                    <div class="text-sm text-gray-500 mt-2">Horário em aberto</div>
+                    <div class="mt-3">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-check-circle mr-1"></i>Disponível
+                        </span>
+                    </div>
+                </div>
+
+                <div class="date-option border-2 border-gray-200 rounded-xl p-6 text-center" data-date="2025-10-05"
+                    data-day="Domingo">
+                    <div class="text-2xl font-bold text-gray-800">05</div>
+                    <div class="text-sm text-gray-600 mb-2">Outubro</div>
+                    <div class="text-lg font-semibold text-green-600">Domingo</div>
+                    <div class="text-sm text-gray-500 mt-2">Horário em aberto</div>
+                    <div class="mt-3">
+                        <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">
+                            <i class="fas fa-check-circle mr-1"></i>Disponível
+                        </span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Botão de envio -->
-            <button type="submit"
-                class="w-full bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2 px-4 rounded-xl transition">
-                Confirmar nosso date 💖
+            <!-- Selected Date Info -->
+            <div id="selected-date-info" class="hidden bg-green-50 border border-green-200 rounded-xl p-6 mb-6">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <h3 class="text-lg font-semibold text-green-800">Data Selecionada</h3>
+                        <p id="selected-date-text" class="text-green-600"></p>
+                    </div>
+                    <div class="text-center sm:text-right">
+                        <div class="text-lg text-gray-500 line-through">R$ 999,00</div>
+                        <div class="text-2xl font-bold text-green-800">GRÁTIS</div>
+                        <div class="text-sm text-green-600 mt-2">
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap">
+                                CUPOM: ITINHO
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchase Button -->
+            <button id="purchase-ticket"
+                class="w-full bg-gradient-to-r from-green-600 to-emerald-700 hover:from-green-700 hover:to-emerald-800 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                disabled>
+                <i class="fas fa-ticket-alt mr-2"></i>
+                Reservar Meu Ingresso
             </button>
-        </form>
-    </div>
+        </div>
+
+    </main>
 
     <script>
-        // Setores da roleta (6 partes iguais de 60 graus cada)
-        const setores = [
-            { inicio: 0, fim: 60, cor: "dourado", premio: "🎫 TICKET DOURADO METÁLICO! ✨\nEste encontro é por minha conta. 💖\nVocê só precisa aparecer e se divertir. 🎉😊" },
-            { inicio: 60, fim: 120, cor: "rosa", premio: null },
-            { inicio: 120, fim: 180, cor: "verde", premio: null },
-            { inicio: 180, fim: 240, cor: "azul", premio: null },
-            { inicio: 240, fim: 300, cor: "roxo", premio: null },
-            { inicio: 300, fim: 360, cor: "laranja", premio: null }
-        ];
+        let selectedDate = null;
+        let selectedDateText = '';
 
-        let roletaGirada = false;
-
-        // Função para girar a roleta
-        function girarRoleta() {
-            if (roletaGirada) return;
-
-            const botao = document.getElementById('girar-roleta');
-            const roleta = document.getElementById('roleta');
-            const premioTexto = document.querySelector('.premio-texto');
-
-            // Desabilitar botão
-            botao.disabled = true;
-            botao.textContent = '🎲 Girando...';
-
-            // Sempre escolher o primeiro setor (0-60 graus) - setor dourado metálico
-            const setorEscolhido = setores[0]; // Primeiro setor da array
-
-            // Para o ponteiro na parte de baixo apontando para o primeiro setor (270-330 graus na rotação final)
-            // Isso fará com que o primeiro setor (0-60 graus original) fique na posição do ponteiro
-            const anguloFinal = 270 + Math.random() * 60; // Entre 270-330 graus
-
-            // Calcular rotação (múltiplas voltas + posição final)
-            const voltasCompletas = 5; // 5 voltas completas
-            const rotacaoTotal = (voltasCompletas * 360) + anguloFinal;
-
-            // Aplicar rotação
-            roleta.style.transform = `rotate(${rotacaoTotal}deg)`;
-
-            // Após a animação terminar (3 segundos)
-            setTimeout(() => {
-                document.getElementById('premio-sorteado').textContent = setorEscolhido.premio;
-                document.getElementById('resultado-roleta').classList.remove('hidden');
-
-                // Remover o botão após o sorteio
-                botao.style.display = 'none';
-
-                roletaGirada = true;
-            }, 3000);
-        }
-
-        // Função para continuar para o formulário
-        function continuarParaDate() {
-            document.getElementById('tela-roleta').classList.add('hidden');
-            document.getElementById('tela-formulario').classList.remove('hidden');
-            
-            // Scroll suave para o topo da página
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        // Função para selecionar data
+        function selectDate(dateElement) {
+            // Remove seleção anterior
+            document.querySelectorAll('.date-option').forEach(option => {
+                option.classList.remove('selected');
+                option.classList.add('border-gray-200');
+                option.classList.remove('border-green-500');
             });
+
+            // Adiciona seleção atual
+            dateElement.classList.add('selected');
+            dateElement.classList.remove('border-gray-200');
+            dateElement.classList.add('border-green-500');
+
+            // Pega dados da data selecionada
+            selectedDate = dateElement.dataset.date;
+            const day = dateElement.dataset.day;
+            const dateNumber = dateElement.querySelector('.text-2xl').textContent;
+            const month = dateElement.querySelector('.text-sm').textContent;
+
+            selectedDateText = `${day}, ${dateNumber} de ${month} • Horário em aberto`;
+
+            // Mostra informações da data selecionada
+            document.getElementById('selected-date-text').textContent = selectedDateText;
+            document.getElementById('selected-date-info').classList.remove('hidden');
+
+            // Habilita botão de compra
+            document.getElementById('purchase-ticket').disabled = false;
         }
 
-        // Função original do WhatsApp
-        function enviarWhatsApp(event) {
-            event.preventDefault();
-            
-            const restaurantes = Array.from(document.querySelectorAll('input[name="restaurantes"]:checked'))
-                .map(input => input.value)
-                .join(', ');
-
-            // Validar se pelo menos um restaurante foi selecionado
-            if (restaurantes.length === 0) {
-                alert('Por favor, selecione pelo menos um restaurante! 😊');
-                return false;
+        // Função para "comprar" ingresso (enviar WhatsApp)
+        function purchaseTicket() {
+            if (!selectedDate) {
+                alert('Por favor, selecione uma data primeiro! 📅');
+                return;
             }
 
-            // Incluir o prêmio da roleta na mensagem
-            const premioSorteado = document.getElementById('premio-sorteado').textContent;
+            const mensagem = `🎫 RESERVA - SURVIVOR Night Experience
 
-            const mensagem = `Oi! Já escolhi:
-🍽️ Restaurantes: ${restaurantes}
-🎫 GANHEI O TICKET DOURADO METÁLICO!`;
+📅 Data: ${selectedDateText}
+GRÁTIS com cupom ITINHO! 🎉
+
+Aceito o convite! 😊✨`;
 
             const numero = '5516982220820';
             const link = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-            window.open(link, '_blank');
-            return false;
+
+            // Feedback visual
+            const button = document.getElementById('purchase-ticket');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+            button.disabled = true;
+
+            // Simula processamento
+            setTimeout(() => {
+                window.open(link, '_blank');
+
+                // Mostra confirmação
+                button.innerHTML = '<i class="fas fa-check mr-2"></i>Ingresso Reservado!';
+                button.classList.remove('from-pink-500', 'to-purple-600');
+                button.classList.add('from-green-500', 'to-green-600');
+
+                // Scroll para o topo
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 1500);
         }
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('girar-roleta').addEventListener('click', girarRoleta);
-            document.getElementById('continuar-date').addEventListener('click', continuarParaDate);
+            // Adiciona event listeners para as opções de data
+            document.querySelectorAll('.date-option').forEach(option => {
+                option.addEventListener('click', () => selectDate(option));
+            });
+
+            // Event listener para o botão de compra
+            document.getElementById('purchase-ticket').addEventListener('click', purchaseTicket);
         });
     </script>
 </body>
